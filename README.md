@@ -1,6 +1,3 @@
----
-title: "Page title"
----
 # ProjektTEX-RTF
 Projekt zakłada skonstruowanie konwertera języka Latex na język Rich Text Format. (file.tex -> file.rtf) \
 W założeniu konweter obsłuży jedynie niecały dokument klasy article:
