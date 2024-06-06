@@ -34,9 +34,7 @@ The parser is responsible for syntactic analysis of the source code. Its job is 
 
 \begin{enumerate}
     \item Scaner
-    \begin{itemize}
-        \item Tokens
-    \end{itemize}
+    \item Tokens
     \item Parser
 \end{enumerate}
 
@@ -68,7 +66,7 @@ The code generator is often the final step in the compilation process. Based on 
 + __SUBSUBSECTION__:'\subsubsection'
 ---
 + __DOTS__:'\dots'
-+ __TEXT__:'[a-zA-Z_0-9!? .,()\t\n;]+'
++ __TEXT__:'[a-zA-Z_0-9!? .:,()\t\n;]++'
 + __LEFT_BRACE__:'{'
 + __RIGHT_BRACE__:'}'
 
@@ -76,22 +74,25 @@ The code generator is often the final step in the compilation process. Based on 
 ## Gramatyka
 
 + S -> DOCUMENT_CLASS_ARTICLE HDR BEGIN_DOCUMENT CONT END_DOCUMENT
-+ HDR ->TITLE LEFT_BRACE TEXT RIGHT_BRACE HDR | AUTHOR LEFT_BRACE TEXT RIGHT_BRACE HDR | ε
++ HDR -> TITLE LEFT_BRACE TEXT RIGHT_BRACE HDR | TITLE LEFT_BRACE TEXT RIGHT_BRACE |
+          AUTHOR LEFT_BRACE TEXT RIGHT_BRACE HDR | AUTHOR LEFT_BRACE TEXT RIGHT_BRACE
 + CONT -> SECT CONT | SECT | TKT CONT | TKT | LST CONT | LST | MAKE_TITLE CONT | MAKE_TITLE
 + SECT -> SECTION BRC | SUBSECTION BRC | SUBSUBSECTION BRC
-+ LST -> BEGIN_ENUMERATE TM LST END_ENUMERATE | BEGIN_ENUMERATE TM LST TM END_ENUMERATE | BEGIN_ENUMERATE TM END_ENUMERATE |
-      BEGIN_ITEMIZE TM LST END_ITEMIZE | BEGIN_ITEMIZE TM LST TM END_ITEMIZE | BEGIN_ITEMIZE TM END_ITEMIZE;
++ LST -> NUMBERED_LIST | BULLETED_LIST
++ NUMBERED-LIST -> BEGIN_ENUMERATE TMN END_ENUMERATE;
++ BULLETED_LIST -> BEGIN_ITEMIZE TMB END_ITEMIZE
 + TKT -> TEXT TKT | TEXT | DOTS TKT | DOTS
 + BRC -> LEFT_BRACE TKT RIGHT_BRACE
-+ TM -> ITEM TKT | ITEM TKT TM
++ TMN: ITEM TKT | ITEM TKT TMN;
++ TMB: ITEM TKT | ITEM TKT TMB;
 
 ---
 ## Gramatyka ANTLR
 
 ```g4
-grammar g;
+grammar TEXtoRTF;
 
-start : DOCUMENT_CLASS_ARTICLE hdr BEGIN_DOCUMENT cont END_DOCUMENT;
+start: DOCUMENT_CLASS_ARTICLE hdr BEGIN_DOCUMENT cont END_DOCUMENT;
 
 hdr: TITLE LEFT_BRACE TEXT RIGHT_BRACE hdr | TITLE LEFT_BRACE TEXT RIGHT_BRACE |
     AUTHOR LEFT_BRACE TEXT RIGHT_BRACE hdr | AUTHOR LEFT_BRACE TEXT RIGHT_BRACE;
@@ -109,12 +110,18 @@ sect: SECTION brc |
 tkt: TEXT tkt | TEXT |
     DOTS tkt | DOTS;
 
-lst: BEGIN_ENUMERATE tm lst END_ENUMERATE | BEGIN_ENUMERATE tm lst tm END_ENUMERATE | BEGIN_ENUMERATE tm END_ENUMERATE |
-    BEGIN_ITEMIZE tm lst END_ITEMIZE | BEGIN_ITEMIZE tm lst tm END_ITEMIZE | BEGIN_ITEMIZE tm END_ITEMIZE;
+lst: numbered_list | bulleted_list;
+
+numbered_list: BEGIN_ENUMERATE tmn END_ENUMERATE;
+
+bulleted_list: BEGIN_ITEMIZE tmb END_ITEMIZE;
 
 brc: LEFT_BRACE TEXT RIGHT_BRACE;
 
-tm: ITEM tkt | ITEM tkt tm;
+tmn: ITEM tkt | ITEM tkt tmn;
+tmb: ITEM tkt | ITEM tkt tmb;
+
+WS: [ \t\r\n]+ -> skip;
 
 DOCUMENT_CLASS_ARTICLE: '\\documentclass{article}';
 BEGIN_DOCUMENT: '\\begin{document}';
@@ -131,7 +138,7 @@ SECTION: '\\section';
 SUBSECTION: '\\subsection';
 SUBSUBSECTION: '\\subsubsection';
 DOTS: '\\dots';
-TEXT: [a-zA-Z_0-9!? .,()\t\n;]+;
+TEXT: [a-zA-Z_0-9!? .:,()\t\n;]+;
 LEFT_BRACE: '{';
 RIGHT_BRACE: '}';
 ```
