@@ -4,6 +4,14 @@ W założeniu konweter obsłuży jedynie niecały dokument klasy article:
 ```tex
 \documentclass{article}
 ```
+### Wymagania i użycie:
+Do poprawnego działania programu wymagane jest posiadanie środowiska uruchomieniowego Java najlepiej w wersji 8 lub nowszej.
+Aby skonwertować plik ```.tex``` na ```.rtf``` należy uruchomić program z podaniem ścieżki do pliku ```.tex``` jako argumentu.
+
+```bash
+
+```
+
 ### Przykładowy plik ```.tex```:
 
 ```tex
