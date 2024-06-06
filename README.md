@@ -9,7 +9,15 @@ Do poprawnego działania programu wymagane jest posiadanie środowiska uruchomie
 Aby skonwertować plik ```.tex``` na ```.rtf``` należy uruchomić program z podaniem ścieżki do pliku ```.tex``` jako argumentu.
 
 ```bash
-
+java -jar TEXtoRTF.jar -o output.rtf input.tex
+```
+aby wyświetlić pomoc należy uruchomić program bez argumentów:
+```bash
+java -jar TEXtoRTF.jar
+````
+lub z argumentem ```-h``` lub ```--help```:
+```bash
+java -jar TEXtoRTF.jar -h
 ```
 
 ### Przykładowy plik ```.tex```:
