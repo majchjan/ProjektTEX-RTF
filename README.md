@@ -215,6 +215,8 @@ Oraz wynikowy plik ```.rtf```:
 + TMB: ITEM TKT | ITEM TKT TMB;
 
 ---
+Do wygenerowania leksera, parsera itp. wykorzystany został ```ANTLR```
+
 ## Gramatyka ANTLR
 
 ```g4
