@@ -1,30 +1,87 @@
 package io.github.majchjan;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+import java.io.*;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        String outputFile = "";
 
-    // Enum definiujący różne rodzaje tokenów
-    enum TokenType {
-        DOCUMENT_CLASS_ARTICLE,
-        BEGIN_DOCUMENT,
-        END_DOCUMENT,
-        BEGIN_ITEMIZE,
-        END_ITEMIZE,
-        BEGIN_ENUMERATE,
-        END_ENUMERATE,
-        TITLE,
-        AUTHOR,
-        SECTION,
-        SUBSECTION,
-        SUBSUBSECTION,
-        HREF,
-        VERB,
-        URL,
-        DOTS,
-        ITEM,
-        MAKE_TITLE,
-        LEFT_BRACE,
-        RIGHT_BRACE,
-        TEXT
+        if (args.length == 0 || argsContains(args, "--help", "-h")) {
+            printHelp();
+            return;
+        } else if (argsContains(args, "--output", "-o")) {
+            outputFile = getOutputFile(args);
+            if (outputFile != null) {
+                processFile(outputFile);
+            } else {
+                System.err.println("Error: No output file specified.");
+                printHelp();
+                return;
+            }
+        } else {
+            printHelp();
+            return;
+        }
 
+        // Wczytaj plik C++ jako wejście
+        CharStream input = CharStreams.fromFileName(outputFile);
+
+        // Stwórz lexer
+        TEXtoRTFLexer lexer = new TEXtoRTFLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+        // Stwórz parser
+        TEXtoRTFParser parser = new TEXtoRTFParser(tokens);
+        ParseTree tree = parser.start();
+
+        // Odwiedź drzewo parsowania, aby konwertować C++ na Python
+        TEXtoRTFConverter converter = new TEXtoRTFConverter();
+        String pythonCode = converter.visit(tree);
+
+        // Wyświetl lub zapisz wynikowy kod Python
+//        System.out.println(pythonCode);
+        PrintWriter out = new PrintWriter(outputFile.replace(".tex", ".rtf"));
+        out.println(pythonCode);
+        out.close();
+    }
+    private static boolean argsContains(String[] args, String longOption, String shortOption) {
+        for (String arg : args) {
+            if (arg.equals(longOption) || arg.equals(shortOption)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static String getOutputFile(String[] args) {
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("--output") || args[i].equals("-o")) {
+                if (i + 1 < args.length) {
+                    return args[i + 1];
+                }
+            }
+        }
+        return null;
+    }
+
+    private static void printHelp() {
+        System.out.println("Usage:");
+        System.out.println("\tTEXtoRTF [options] [input-file]");
+        System.out.println();
+        System.out.println("\tOptions:");
+        System.out.println("\t\t-h        (Display this help message)");
+        System.out.println("\t\t--help    (Display this help message)");
+        System.out.println("\t\t-o <file> (Process the specified input file)");
+        System.out.println("\t\t--output <file> (Process the specified input file)");
+    }
+
+    private static void processFile(String fileName) {
+        File file = new File(fileName);
+        if (file.exists()) {
+//            System.out.println("Processing file: " + fileName);
+        } else {
+            System.err.println("TEXtoRTX: Error: File not found - " + fileName);
+        }
     }
 }
