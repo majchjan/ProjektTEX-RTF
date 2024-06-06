@@ -1,5 +1,5 @@
 # ProjektTEX-RTF
-Projekt zakłada skonstruowanie konwertera języka Latex na język Rich Text Format. (file.tex -> file.rtf) \
+Projekt zakłada skonstruowanie konwertera języka Latex na język Rich Text Format. (file.tex -> file.rtf) w języku JAVA\
 W założeniu konweter obsłuży jedynie niecały dokument klasy article:
 ```tex
 \documentclass{article}
