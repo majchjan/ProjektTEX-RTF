@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bae82f9-7e39-4f60-9a92-345bbfeb7250" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/g.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gramatyka.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/majchjan/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/io/github/majchjan/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/github/majchjan/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/test/java/io/github/majchjan/MainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/g.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/g.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gen/gVisitor.java" beforeDir="false" />
-    </list>
+    <list default="true" id="4bae82f9-7e39-4f60-9a92-345bbfeb7250" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,9 +13,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2hU2CbiPi9v9EIGa0VFeD23RMEO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -42,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Programs/IntelliJ/saves/GitHub_majchjan/ProjektTEX-RTF/Code",
+    "last_opened_file_path": "D:/Programs/IntelliJ/saves/GitHub_majchjan/ProjektTEX-RTF",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -58,6 +42,7 @@
       <option name="presentableId" value="Default" />
       <updated>1717634211188</updated>
       <workItem from="1717634212196" duration="115000" />
+      <workItem from="1717634491045" duration="50000" />
     </task>
     <servers />
   </component>
