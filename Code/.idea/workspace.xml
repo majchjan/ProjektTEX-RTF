@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Code:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4bae82f9-7e39-4f60-9a92-345bbfeb7250" name="Changes" comment="gotowy kod gramatyki i konwertera">
+      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/majchjan/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/majchjan/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,22 +43,41 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Programs/IntelliJ/saves/GitHub_majchjan/ProjektTEX-RTF/Code/src",
+    "last_opened_file_path": "D:/Programs/IntelliJ/saves/GitHub_majchjan/ProjektTEX-RTF/Code",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programs\IntelliJ\saves\GitHub_majchjan\ProjektTEX-RTF\Code" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Programs\IntelliJ\saves\GitHub_majchjan\ProjektTEX-RTF\Code\src\main\java\io\github\majchjan" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.github.majchjan.Main" />
+      <module name="Code" />
+      <option name="PROGRAM_PARAMETERS" value="-o output123.rtf input.tex" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.github.majchjan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -62,7 +89,8 @@
       <updated>1717634211188</updated>
       <workItem from="1717634212196" duration="115000" />
       <workItem from="1717634491045" duration="50000" />
-      <workItem from="1717634575951" duration="499000" />
+      <workItem from="1717634575951" duration="605000" />
+      <workItem from="1717671429733" duration="3664000" />
     </task>
     <task id="LOCAL-00001" summary="dodanie wygenerowanych klas">
       <option name="closed" value="true" />
@@ -80,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717635032621</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="gotowy kod gramatyki i konwertera">
+      <option name="closed" value="true" />
+      <created>1717635105782</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717635105782</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

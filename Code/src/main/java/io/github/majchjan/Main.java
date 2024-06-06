@@ -1,44 +1,44 @@
 package io.github.majchjan;
+
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+
 import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String outputFile = "";
-
         if (args.length == 0 || argsContains(args, "--help", "-h")) {
-            printHelp();
-            return;
-        } else if (argsContains(args, "--output", "-o")) {
-            outputFile = getOutputFile(args);
-            if (outputFile != null) {
-                processFile(outputFile);
-            } else {
-                System.err.println("Error: No output file specified.");
-                printHelp();
-                return;
-            }
-        } else {
             printHelp();
             return;
         }
 
-        CharStream input = CharStreams.fromFileName(outputFile);
+        String inputFile = "";
+        String outputFile = "";
 
-        TEXtoRTFLexer lexer = new TEXtoRTFLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        if (argsContains(args, "--output", "-o")) {
+            inputFile = getInputFile(args);
+            outputFile = getOutputFile(args);
 
-        TEXtoRTFParser parser = new TEXtoRTFParser(tokens);
-        ParseTree tree = parser.start();
+            if (inputFile == null) {
+                System.err.println("Error: No input file specified.");
+                printHelp();
+                return;
+            }
 
-        TEXtoRTFConverter converter = new TEXtoRTFConverter();
-        String pythonCode = converter.visit(tree);
+            if (outputFile == null) {
+                System.err.println("Error: No output file specified.");
+                printHelp();
+                return;
+            }
 
-        PrintWriter out = new PrintWriter(outputFile.replace(".tex", ".rtf"));
-        out.println(pythonCode);
-        out.close();
+            // Przetwórz plik wejściowy
+            processFile(inputFile, outputFile);
+        } else {
+            printHelp();
+            return;
+        }
     }
+
     private static boolean argsContains(String[] args, String longOption, String shortOption) {
         for (String arg : args) {
             if (arg.equals(longOption) || arg.equals(shortOption)) {
@@ -59,23 +59,54 @@ public class Main {
         return null;
     }
 
-    private static void printHelp() {
-        System.out.println("Usage:");
-        System.out.println("\tTEXtoRTF [options] [input-file]");
-        System.out.println();
-        System.out.println("\tOptions:");
-        System.out.println("\t\t-h        (Display this help message)");
-        System.out.println("\t\t--help    (Display this help message)");
-        System.out.println("\t\t-o <file> (Process the specified input file)");
-        System.out.println("\t\t--output <file> (Process the specified input file)");
+    private static String getInputFile(String[] args) {
+        for (int i = 0; i < args.length - 1; i++) {
+            if ((args[i].equals("--output") || args[i].equals("-o")) && (i + 2 < args.length)) {
+                return args[i + 2];
+            }
+        }
+        return null;
     }
 
-    private static void processFile(String fileName) {
-        File file = new File(fileName);
-        if (file.exists()) {
-//            System.out.println("Processing file: " + fileName);
-        } else {
-            System.err.println("TEXtoRTX: Error: File not found - " + fileName);
+    private static void printHelp() {
+        System.out.println("Usage:");
+        System.out.println("\tjava -jar TEXtoRTF.jar [options] <input-file>");
+        System.out.println();
+        System.out.println("\tOptions:");
+        System.out.println("\t\t-h, --help    (Display this help message)");
+        System.out.println("\t\t-o <file>, --output <file> (Specify the output file)");
+        System.out.println();
+        System.out.println("\tExample:");
+        System.out.println("\t\tjava -jar TEXtoRTF.jar --output output.rtf input.tex");
+    }
+
+
+    private static void processFile(String inputFile, String outputFile) {
+        try {
+            CharStream input = CharStreams.fromFileName(inputFile);
+
+            TEXtoRTFLexer lexer = new TEXtoRTFLexer(input);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            TEXtoRTFParser parser = new TEXtoRTFParser(tokens);
+
+            parser.removeErrorListeners();
+            parser.addErrorListener(new TEXtoRTFErrorListener());
+
+            ParseTree tree = parser.start();
+
+            TEXtoRTFConverter converter = new TEXtoRTFConverter();
+            String rtfContent = converter.visit(tree);
+
+            try (PrintWriter out = new PrintWriter(outputFile)) {
+                out.println(rtfContent);
+            }
+
+            System.out.println("Converted " + inputFile + " to " + outputFile);
+
+        } catch (IOException e) {
+            System.err.println("Error processing file: " + e.getMessage());
+        } catch (RecognitionException e) {
+            System.err.println("Syntax error in input file: " + e.getMessage());
         }
     }
 }
