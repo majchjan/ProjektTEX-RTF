@@ -24,23 +24,17 @@ public class Main {
             return;
         }
 
-        // Wczytaj plik C++ jako wejście
         CharStream input = CharStreams.fromFileName(outputFile);
 
-        // Stwórz lexer
         TEXtoRTFLexer lexer = new TEXtoRTFLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-        // Stwórz parser
         TEXtoRTFParser parser = new TEXtoRTFParser(tokens);
         ParseTree tree = parser.start();
 
-        // Odwiedź drzewo parsowania, aby konwertować C++ na Python
         TEXtoRTFConverter converter = new TEXtoRTFConverter();
         String pythonCode = converter.visit(tree);
 
-        // Wyświetl lub zapisz wynikowy kod Python
-//        System.out.println(pythonCode);
         PrintWriter out = new PrintWriter(outputFile.replace(".tex", ".rtf"));
         out.println(pythonCode);
         out.close();
